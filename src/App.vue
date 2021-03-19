@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Contacts</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view />
   </div>
 </template>
@@ -16,17 +12,14 @@
   text-align: center;
   color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
+a {
+  text-decoration: none;
   color: #2c3e50;
+  padding: 10px;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+a:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+  text-decoration: none;
+  color: #2c3e50;
 }
 </style>
