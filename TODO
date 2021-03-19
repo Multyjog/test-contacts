@@ -1,0 +1,5 @@
+-[x] Input field 
+    -[x] Name
+    -[x] Phone
+-[x] Attach input to an object's keys
+-[] Save to Local Storage
