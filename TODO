@@ -2,4 +2,7 @@
     -[x] Name
     -[x] Phone
 -[x] Attach input to an object's keys
--[] Save to Local Storage
+-[x] Save to Local Storage
+-[] Delete contact with confirm
+    -[] Set the funcion shows the popup or else
+    -[] By clicking yes at popup call the delete function, else - do nothing

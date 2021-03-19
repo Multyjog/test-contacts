@@ -6,6 +6,9 @@
       <input id="phone" placeholder="Phone Numer" />
       <input type="submit" @click="saveNewContact" value="Add Contact" />
     </div>
+    <div class="emptyBook" v-if="contacts.length === 0">
+      You dont have any contacts yet. Let's add them
+    </div>
     <div v-for="(contact, index) in contacts" :key="index">
       <div class="row">
         <h3 class="col-sm-6">{{ contact.name }}</h3>
@@ -29,7 +32,24 @@ export default {
       let contactPhone = document.querySelector("#phone").value;
       let listEl = { name: contactName, phone: contactPhone };
       this.contacts.push(listEl);
+      this.saveToLocal(this.contacts);
     },
+    saveToLocal(obj) {
+      localStorage.setItem("contacts", JSON.stringify(obj));
+    },
+  },
+  mounted() {
+    if (!localStorage.getItem("contacts")) this.contacts = [];
+    else {
+      let storedContacts = localStorage.getItem("contacts");
+      this.contacts = ("storedContacts: ", JSON.parse(storedContacts));
+    }
   },
 };
 </script>
+
+<style scoped>
+.emptyBook {
+  margin-top: 3rem;
+}
+</style>
