@@ -12,9 +12,10 @@ const routes = [
     component: Contacts,
   },
   {
-    path: "/about",
-    name: "About",
+    path: "/about/:id",
+    name: "about",
     component: About,
+    props: true,
   },
 ];
 

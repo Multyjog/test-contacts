@@ -10,7 +10,11 @@
         :key="index"
         class="contact row"
       >
-        <router-link to="/about" class="col-sm-8">
+        <!--:to="{ name: 'details', params: { projectId: index } }"-->
+        <router-link
+          :to="{ name: 'about', params: { id: index } }"
+          class="col-sm-8"
+        >
           <span>{{ contact.name }}</span>
           <span>{{ contact.phone }}</span>
         </router-link>

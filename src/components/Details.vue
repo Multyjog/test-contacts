@@ -1,10 +1,14 @@
 <template>
   <div>
-    <router-link to="/">Contacts</router-link>
+    <router-link to="/">Back To Contacts</router-link>
     <div class="info">
       <div class="photo"><img src="../assets/placeholder.png" alt="" /></div>
-      <div class="name"><h1>{{}}</h1></div>
-      <div class="phone"><h1>{{}}</h1></div>
+      <div class="name">
+        <h1>{{ contact.name }}</h1>
+      </div>
+      <div class="phone">
+        <h1>{{ contact.phone }}</h1>
+      </div>
     </div>
     <div class="inputs">
       <input id="key" placeholder="Type" />
@@ -17,10 +21,29 @@
 <script>
 export default {
   name: "Details",
+  data: () => {
+    return {
+      contact: {},
+      contactId: 0,
+    };
+  },
+  methods: {},
+  mounted() {
+    this.contactId = this.$route.params.id;
+    let currentContact = localStorage.getItem("contacts");
+    let contacts = ("currentContact: ", JSON.parse(currentContact));
+    this.contact = contacts[this.contactId];
+  },
 };
 </script>
 
 <style scoped>
+a {
+  background-color: chocolate;
+  font-weight: bolder;
+  color: white;
+  border-radius: 0 0 10px 10px;
+}
 input {
   margin: 5% 1%;
 }
