@@ -9,11 +9,17 @@
       <div class="phone">
         <h1>{{ contact.phone }}</h1>
       </div>
+      <div class="extra" v-if="'misc' in contact">
+        <h1 v-for="(misc, index) in contact.misc" :key="index">
+          {{ contact.misc.category }} -
+          {{ contact.misc.value }}
+        </h1>
+      </div>
     </div>
     <div class="inputs">
       <input id="key" placeholder="Type" />
       <input id="value" placeholder="Value" />
-      <input type="submit" value="Add New Info" />
+      <input type="submit" @click="addNewInfo" value="Add New Info" />
     </div>
   </div>
 </template>
@@ -27,7 +33,15 @@ export default {
       contactId: 0,
     };
   },
-  methods: {},
+  methods: {
+    addNewInfo() {
+      let infoType = document.querySelector("#key").value;
+      let infoValue = document.querySelector("#value").value;
+      let newInfo = { category: infoType, value: infoValue };
+      this.contact = { ...this.contact, misc: { ...newInfo } };
+      //   this.saveToLocal(this.contacts);
+    },
+  },
   mounted() {
     this.contactId = this.$route.params.id;
     let currentContact = localStorage.getItem("contacts");

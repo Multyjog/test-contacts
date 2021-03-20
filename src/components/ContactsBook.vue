@@ -47,7 +47,7 @@ export default {
     };
   },
   methods: {
-    saveNewContact: function () {
+    saveNewContact() {
       let contactName = document.querySelector("#name").value;
       let contactPhone = document.querySelector("#phone").value;
       let listEl = { name: contactName, phone: contactPhone };
