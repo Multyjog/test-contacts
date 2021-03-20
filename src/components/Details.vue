@@ -9,10 +9,10 @@
       <div class="phone">
         <h1>{{ contact.phone }}</h1>
       </div>
-      <div class="extra" v-if="'misc' in contact">
-        <h1 v-for="(misc, index) in contact.misc" :key="index">
-          {{ contact.misc.category }} -
-          {{ contact.misc.value }}
+      <div class="extra" v-if="contact.misc">
+        <h1 v-for="miscItem in contact.misc" :key="miscItem">
+          {{ Object.keys(miscItem)[0] }} :
+          {{ miscItem[Object.keys(miscItem)[0]] }}
         </h1>
       </div>
     </div>
@@ -35,17 +35,17 @@ export default {
   },
   methods: {
     addNewInfo() {
+      if (!this.contact.misc) {
+        this.contact = { ...this.contact, misc: [] };
+      }
       let infoType = document.querySelector("#key").value;
       let infoValue = document.querySelector("#value").value;
-      let newInfo = { category: infoType, value: infoValue };
-      this.contact = { ...this.contact, misc: { ...newInfo } };
-      //   this.saveToLocal(this.contacts);
+      this.contact.misc.push({ [infoType]: infoValue });
     },
   },
   mounted() {
     this.contactId = this.$route.params.id;
-    let currentContact = localStorage.getItem("contacts");
-    let contacts = ("currentContact: ", JSON.parse(currentContact));
+    let contacts = JSON.parse(localStorage.getItem("contacts"));
     this.contact = contacts[this.contactId];
   },
 };

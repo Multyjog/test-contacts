@@ -76,8 +76,7 @@ export default {
   mounted() {
     if (!localStorage.getItem("contacts")) this.contacts = [];
     else {
-      let storedContacts = localStorage.getItem("contacts");
-      this.contacts = ("storedContacts: ", JSON.parse(storedContacts));
+      this.contacts = JSON.parse(localStorage.getItem("contacts"));
     }
   },
 };
