@@ -9,4 +9,5 @@
     -[x] By clicking yes at popup call the delete function, else - do nothing
 -[] Add validating to my inputs
 -[] Add a contact information router link
+-[] Pass parameters such as ID in route
 

@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "ContactsBook",
   data: () => {
     return {
       contacts: [],
