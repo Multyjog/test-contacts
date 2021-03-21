@@ -4,13 +4,12 @@
     <div class="container">
       <input id="name" placeholder="Name" />
       <input id="phone" placeholder="Phone Numer" />
-      <input type="submit" @click="saveNewContact" value="Add Contact" />
+      <input type="submit" @click="addContact" value="Add Contact" />
       <div
         v-for="(contact, index) in contacts"
         :key="index"
         class="contact row"
       >
-        <!--:to="{ name: 'details', params: { projectId: index } }"-->
         <router-link
           :to="{ name: 'about', params: { id: index } }"
           class="col-sm-8"
@@ -19,7 +18,7 @@
           <span>{{ contact.phone }}</span>
         </router-link>
         <div class="col-sm-4">
-          <button class="deleteButton" @click="showConfirm(index)">
+          <button class="deleteButton" @click="deleteContact(index)">
             Delete
           </button>
         </div>
@@ -28,56 +27,28 @@
     <div class="emptyBook" v-if="contacts.length === 0">
       You dont have any contacts yet. Let's add them
     </div>
-    <div class="confirm" v-if="isMenuVisible">
-      <p>Are you sure!?</p>
-      <button id="yes" @click="confirmDelete">Yes</button>
-      <button id="no" @click="hideConfirm">No</button>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "ContactsBook",
-  data: () => {
-    return {
-      contacts: [],
-      indexToRemove: null,
-      isMenuVisible: false,
-    };
-  },
   methods: {
-    saveNewContact() {
+    deleteContact(index) {
+      if (!confirm("Are you sure?")) return;
+      this.$store.dispatch("deleteContact", index);
+    },
+    addContact() {
       let contactName = document.querySelector("#name").value;
       let contactPhone = document.querySelector("#phone").value;
-      let listEl = { name: contactName, phone: contactPhone };
-      this.contacts.push(listEl);
-      this.saveToLocal(this.contacts);
-    },
-    saveToLocal(obj) {
-      localStorage.setItem("contacts", JSON.stringify(obj));
-    },
-    showConfirm(i) {
-      this.isMenuVisible = true;
-      this.indexToRemove = i;
-    },
-    hideConfirm() {
-      this.isMenuVisible = false;
-    },
-    confirmDelete() {
-      let i = this.indexToRemove;
-      let newContacts = [...this.contacts];
-      newContacts.splice(i, 1);
-      this.contacts = newContacts;
-      this.hideConfirm();
-      this.saveToLocal(this.contacts);
+      let contact = { name: contactName, phone: contactPhone, extra: [] };
+      this.$store.dispatch("addContact", contact);
     },
   },
-  mounted() {
-    if (!localStorage.getItem("contacts")) this.contacts = [];
-    else {
-      this.contacts = JSON.parse(localStorage.getItem("contacts"));
-    }
+  computed: {
+    contacts: function () {
+      return this.$store.getters.contactList;
+    },
   },
 };
 </script>
