@@ -1,24 +1,9 @@
-# test-contacts
+### This is a test task for my employment
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+#### Functional:
+- Add/Delete a new contact
+- Page with details for each contact
+- Editing the contact on both pages
+- Add/Delete extra fields on details page
+- UNDO function
+- Confirm on every important action
