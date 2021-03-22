@@ -26,5 +26,6 @@ npm run serve
 ```
 Open in browser http://localhost:8080/
 
+## Deployment
 
-Change link on the repo in deploy.sh and vue.config.js and use "npm run deploy" for deploy on GHPages
+Change link on the repo in deploy.sh and vue.config.js and use `npm run deploy` for deploy on GHPages
