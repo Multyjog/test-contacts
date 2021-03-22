@@ -5,10 +5,11 @@
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body {
+  background-image: url("assets/background.jpeg");
+  background-repeat: no-repeat;
+  background-position: top;
+  font-weight: bolder;
   text-align: center;
   color: #2c3e50;
 }

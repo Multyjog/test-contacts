@@ -9,10 +9,7 @@ export default new Vuex.Store({
       {
         name: "Simon Kotov",
         phone: "+7 999 803 22 39",
-        extra: [
-          { key: "email", value: "@gmail" },
-          { key: "mail", value: "@mail" },
-        ],
+        extra: [{ key: "Email", value: "simon.kotov.web@gmail.com" }],
       },
     ],
   },

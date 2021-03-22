@@ -1,20 +1,20 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Contacts from "../views/Contacts.vue";
-import About from "../views/About.vue";
+import ContactsBook from "../views/ContactsBook.vue";
+import Details from "../views/Details.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Contacts",
-    component: Contacts,
+    name: "ContactsBook",
+    component: ContactsBook,
   },
   {
-    path: "/about/:id",
-    name: "about",
-    component: About,
+    path: "/details/:id",
+    name: "Details",
+    component: Details,
     props: true,
   },
 ];

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div><h2>Contacts Book for TR Logic LLC</h2></div>
+  <div class="background">
+    <div class="logo"><h2>Contacts Book for TR Logic LLC</h2></div>
     <div class="container">
       <input id="name" placeholder="Name" />
       <input id="phone" placeholder="Phone Numer" />
@@ -11,7 +11,7 @@
         class="contact row"
       >
         <router-link
-          :to="{ name: 'about', params: { id: index } }"
+          :to="{ name: 'Details', params: { id: index } }"
           class="col-sm-8"
         >
           <span>{{ contact.name }}</span>
@@ -54,6 +54,9 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  margin-top: 3rem;
+}
 .container input {
   margin: 1% 1%;
 }
@@ -80,9 +83,9 @@ export default {
 .deleteButton {
   background-image: linear-gradient(
     to right,
-    #314755 0%,
-    #26a0da 51%,
-    #314755 100%
+    #434344 0%,
+    #979526 51%,
+    #434344 100%
   );
   text-align: center;
   transition: 0.5s;

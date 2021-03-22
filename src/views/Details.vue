@@ -9,7 +9,7 @@
       <button
         class="btn btn-primary"
         @click="saveContact"
-        :disabled="!newExtra"
+        :disabled="!hasChanges"
       >
         Save
       </button>
@@ -20,7 +20,11 @@
         <h1>{{ contact.phone }}</h1>
       </div>
       <div class="extra" v-if="contactExtra">
-        <h1 v-for="(extraEntry, index) in contactExtra" :key="index">
+        <div
+          class="extraItem"
+          v-for="(extraEntry, index) in contactExtra"
+          :key="index"
+        >
           {{ extraEntry.key }} :
           <InputWithEdit
             :value="extraEntry.value"
@@ -32,12 +36,15 @@
           >
             X
           </button>
-        </h1>
+        </div>
       </div>
     </div>
     <div class="inputs">
       <input v-model="newExtraKey" placeholder="Type" />
       <button @click="addExtraEntry">Add New Field</button>
+      <button v-if="hasChanges" @click="undoLastAction">
+        Undo last action
+      </button>
     </div>
   </div>
 </template>
@@ -52,12 +59,14 @@ export default {
   data: () => {
     return {
       newExtraKey: "",
-      newExtra: null,
-      previousExtraState: [],
+      extraStates: [],
     };
   },
   methods: {
-    saveActualExtraState() {},
+    saveToLastExtraState() {
+      this.extraStates.push(this.getExtraCopy());
+      console.log(this.extraStates);
+    },
     saveContact() {
       const contact = { ...this.contact, extra: this.contactExtra };
       this.$store.dispatch("updateContact", {
@@ -73,21 +82,28 @@ export default {
     },
     addExtraEntry() {
       if (this.newExtraKey === "") return;
-      if (!this.newExtra) this.newExtra = [...this.contactExtra];
-      this.newExtra.push({ key: this.newExtraKey, value: "" });
+      this.saveToLastExtraState();
+      this.contactExtra.push({ key: this.newExtraKey, value: "" });
       this.newExtraKey = "";
     },
     updateExtraEntry(index, value) {
-      if (!this.newExtra) this.newExtra = [...this.contactExtra];
-      this.newExtra[index].value = value;
+      this.saveToLastExtraState();
+      this.contactExtra[index].value = value;
     },
     deleteExtraEntryWithConfirm(index) {
       if (!confirm("Really?")) return;
       this.deleteExtraEntry(index);
     },
     deleteExtraEntry(index) {
-      if (!this.newExtra) this.newExtra = [...this.contactExtra];
-      this.newExtra.splice(index, 1);
+      this.saveToLastExtraState();
+      this.contactExtra.splice(index, 1);
+    },
+    getExtraCopy() {
+      return this.contactExtra.map((x) => ({ ...x }));
+    },
+    undoLastAction() {
+      if (!this.extraStates.length) return;
+      this.extraStates.pop();
     },
   },
   computed: {
@@ -98,14 +114,25 @@ export default {
       return this.$store.getters.getContact(this.contactIndex);
     },
     contactExtra: function () {
-      if (this.newExtra) return this.newExtra;
+      if (this.extraStates.length)
+        return this.extraStates[this.extraStates.length - 1];
       return this.contact.extra;
+    },
+    hasChanges: function () {
+      return this.extraStates.length > 0;
     },
   },
 };
 </script>
 
 <style scoped>
+.extraItem {
+  font-size: 24px;
+  width: 51%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+}
 a {
   background-color: chocolate;
   font-weight: bolder;
@@ -115,7 +142,13 @@ a {
 input {
   margin: 1% 1%;
 }
+.inputs {
+  margin-bottom: 3rem;
+}
 .photo {
   margin: 1% auto 0 auto;
+}
+button {
+  margin: 1rem;
 }
 </style>
