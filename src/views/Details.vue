@@ -145,7 +145,7 @@ input {
   margin-bottom: 3rem;
 }
 .photo {
-  margin: 8rem auto 0 auto;
+  margin: 2rem auto 0 auto;
 }
 button {
   margin: 1rem;
