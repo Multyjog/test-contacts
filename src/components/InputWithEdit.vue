@@ -26,6 +26,7 @@ export default {
       this.isEditing = true;
     },
     cancelEdit() {
+      if (!confirm("Really?")) return;
       this.isEditing = false;
       this.currentValue = this.value;
     },

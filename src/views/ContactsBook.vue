@@ -2,8 +2,8 @@
   <div class="background">
     <div class="logo"><h2>Contacts Book for TR Logic LLC</h2></div>
     <div class="container">
-      <input id="name" placeholder="Name" />
-      <input id="phone" placeholder="Phone Numer" />
+      <input v-model="name" placeholder="Name" />
+      <input v-model="phone" placeholder="Phone Numer" />
       <input type="submit" @click="addContact" value="Add Contact" />
       <div
         v-for="(contact, index) in contacts"
@@ -18,7 +18,7 @@
           <span>{{ contact.phone }}</span>
         </router-link>
         <div class="col-sm-4">
-          <button class="deleteButton" @click="deleteContact(index)">
+          <button class="btn btn-danger" @click="deleteContact(index)">
             Delete
           </button>
         </div>
@@ -33,16 +33,22 @@
 <script>
 export default {
   name: "ContactsBook",
+  data: () => {
+    return {
+      name: "",
+      phone: "",
+    };
+  },
   methods: {
     deleteContact(index) {
       if (!confirm("Are you sure?")) return;
       this.$store.dispatch("deleteContact", index);
     },
     addContact() {
-      let contactName = document.querySelector("#name").value;
-      let contactPhone = document.querySelector("#phone").value;
-      let contact = { name: contactName, phone: contactPhone, extra: [] };
+      let contact = { name: this.name, phone: this.phone, extra: [] };
       this.$store.dispatch("addContact", contact);
+      this.name = "";
+      this.phone = "";
     },
   },
   computed: {
@@ -79,27 +85,5 @@ export default {
 }
 .contact span {
   margin: 0 5%;
-}
-.deleteButton {
-  background-image: linear-gradient(
-    to right,
-    #434344 0%,
-    #979526 51%,
-    #434344 100%
-  );
-  text-align: center;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  border-radius: 10px;
-  font-weight: bold;
-  padding: 10px;
-  margin: 0 auto;
-  width: 30%;
-}
-.deleteButton:hover {
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
 }
 </style>

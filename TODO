@@ -7,12 +7,10 @@
     -[x] Set the funcion shows the popup or else
     -[x] Define the delete function which takes the unique key and by it delete the obj from array
     -[x] By clicking yes at popup call the delete function, else - do nothing
--[] Add validating to my inputs
--[] Change querySelector on v-modal or v-bind
+-[x] Change querySelector on v-modal or v-bind
 -[x] Add a contact information router link
 -[x] Pass parameters such as ID in route
 -[x] Add functional for add a new fields in to contact
     -[x] Make deleting the new fields 
-    -[] Add result to a localstorage
--[] Make UNDO
+-[x] Make UNDO
 -[x] Change my menu on confirm menu

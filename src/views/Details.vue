@@ -65,7 +65,6 @@ export default {
   methods: {
     saveToLastExtraState() {
       this.extraStates.push(this.getExtraCopy());
-      console.log(this.extraStates);
     },
     saveContact() {
       const contact = { ...this.contact, extra: this.contactExtra };
@@ -146,7 +145,7 @@ input {
   margin-bottom: 3rem;
 }
 .photo {
-  margin: 1% auto 0 auto;
+  margin: 8rem auto 0 auto;
 }
 button {
   margin: 1rem;
