@@ -22,10 +22,9 @@
       <div class="extra" v-if="contactExtra">
         <h1 v-for="(extraEntry, index) in contactExtra" :key="index">
           {{ extraEntry.key }} :
-          <input
-            type="text"
+          <InputWithEdit
             :value="extraEntry.value"
-            @keyup="(e) => updateExtraEntry(index, e.target.value)"
+            @change="(value) => updateExtraEntry(index, value)"
           />
           <button
             class="btn btn-danger ml-2"
@@ -44,8 +43,12 @@
 </template>
 
 <script>
+import InputWithEdit from "@/components/InputWithEdit.vue";
 export default {
   name: "Details",
+  components: {
+    InputWithEdit,
+  },
   data: () => {
     return {
       newExtraKey: "",
