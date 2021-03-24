@@ -14,9 +14,11 @@ export default new Vuex.Store({
     ],
   },
   getters: {
+    // This is property
     contactList: (state) => {
       return state.contacts;
     },
+    // This is a function
     getContact: (state) => {
       return (index) => state.contacts[index];
     },
@@ -32,6 +34,7 @@ export default new Vuex.Store({
       state.contacts.splice(index, 1, contact);
     },
   },
+  // contains business logic. If i want to show confirm before manipulating state, I can do it here.8j
   actions: {
     addContact({ commit }, contact) {
       commit("addContact", contact);
